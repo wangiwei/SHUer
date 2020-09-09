@@ -3,17 +3,23 @@ import numpy as np
 import random
 import time
 from .data import *
+from .fitness import fitness
+from .variate_same_temperature import variate_same_temperature
 
+
+# 需求调节
+alpha = 0.7
+h3 = np.zeros(demand)
+for i in range(demand):
+    h3[i] =  alpha * h1[i] + (1 - alpha) * h2[i]
 
 # 算法参数
 initial_temp = 1000
 final_temp = 0.001
 reduce_temp = 0.9
-# 等温变异
 internal_loop = 100
 
 best_value = list()
-
 # 产生随机可行解
 z = np.zeros(demand*level)
 for i in range(demand):
@@ -28,13 +34,10 @@ start_time = time.time()
 i = 0
 while initial_temp > final_temp:
 
-    # 适应度值
-
     # 等温变异
-    for loop in range(internal_loop):
-        pass
+    z, best_value_under_same_temperature = variate_same_temperature()
 
-    best_value.append()
+    best_value.append(best_value_under_same_temperature)
     initial_temp = initial_temp * reduce_temp
     i = i + 1
 
