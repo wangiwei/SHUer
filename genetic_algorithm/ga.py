@@ -10,10 +10,10 @@ from genetic_algorithm.variate import variate
 
 
 # algorithm parameters
-population = 200
-iteration = 1000
+population = 100
+iteration = 5000
 variation = 0.2
-crossover = 0.6
+crossover = 0.5
 
 average_value = np.zeros(iteration)
 best_solution = np.zeros(demand * level)
@@ -31,7 +31,7 @@ z = np.zeros((population, demand * level))
 for pop in range(population):
     for i in range(demand):
         min_dis = min(distance[i, :, 0])
-        if random.random() > 0.3:
+        if random.random() > 0.4:
             # 180 标记某一需求点某一层未分配
             z[pop, i * 2] = distance[i, :, 0].tolist().index(min_dis)
             z[pop, i * 2 + 1] = 180
